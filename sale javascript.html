@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=.7">
+		<title>My Sale</title>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+		<style>
+      * {
+			box-sizing: border-box;
+      }
+      html, body {
+		min-height: 100vh;
+		padding: 0;
+		margin: 0;
+		font-family: Roboto, Arial, sans-serif;
+		font-size: 14px; 
+		color: #666;
+      }
+		  input, textarea { 
+		  outline: none;
+      }
+      body {
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  padding: 20px;
+		  background: #5a7233;
+      }
+      h1 {
+		  margin-top: 0;
+		  font-weight: 500;
+      }
+      .decor {
+		  position: relative;
+		  width: 80%;
+		  border-radius: 30px;
+		  background: #fff;
+      }
+      .form-left-decoration,
+      .form-right-decoration {
+		  content: "";
+		  position: absolute;
+		  width: 50px;
+		  height: 20px;
+		  border-radius: 20px;
+		  background: #5a7233;
+      }
+      .form-left-decoration {
+		  bottom: 60px;
+		  left: -30px;
+      }
+      .form-right-decoration {
+		  top: 60px;
+		  right: -30px;
+      }
+      .form-left-decoration:before,
+      .form-left-decoration:after,
+      .form-right-decoration:before,
+      .form-right-decoration:after {
+		  content: "";
+		  position: absolute;
+		  width: 50px;
+		  height: 20px;
+		  border-radius: 30px;
+		  background: #fff;
+      }
+      .form-left-decoration:before {
+		top: -20px;
+      }
+      .form-left-decoration:after {
+		  top: 20px;
+		  left: 10px;
+      }
+      .form-right-decoration:before {
+		  top: -20px;
+		  right: 0;
+      }
+      .form-right-decoration:after {
+		  top: 20px;
+		  right: 10px;
+      }
+      .circle {
+		  position: absolute;
+		  bottom: 80px;
+		  left: -55px;
+		  width: 20px;
+		  height: 20px;
+		  border-radius: 50%;
+		  background: #fff;
+      }
+      .form-inner {
+		padding: 40px;
+      }
+      .form-inner input,
+      .form-inner textarea {
+		  display: block;
+		  width: 100%;
+		  padding: 15px;
+		  margin-bottom: 10px;
+		  border: none;
+		  border-radius: 20px;
+		  background: #d0dfe8;
+      }
+      .form-inner textarea {
+		resize: none;
+      }
+      button {
+		  width: 100%;
+		  padding: 10px;
+		  margin-top: 20px;
+		  border-radius: 20px;
+		  border: none;
+		  border-bottom: 4px solid #3e4f24;
+		  background: #5a7233; 
+		  font-size: 16px;
+		  font-weight: 400;
+		  color: #fff;
+      }
+      button:hover {
+		background: #3e4f24;
+      } 
+      @media (min-width: 568px) {
+		.decor {
+			width: 500px;
+		}
+      }
+	  .sel{
+		width: 40%;
+		margin-top: 0;
+		margin-left: 5%;
+		margin-right: 5%;
+	  }
+	  .but{
+		width: 100%;
+		text-align: center;
+	  }
+	  #sle{
+		display: none;
+	  }
+	  #dbt{
+		display: none;
+	  }
+	  .modal {
+		display:    none;
+		position:   fixed;
+		z-index:    1000;
+		top:        0;
+		left:       0;
+		height:     100%;
+		width:      100%;
+		background: rgba( 255, 255, 255, .8 ) 
+					url('aja.gif') 
+					50% 50% 
+					no-repeat;
+		background-size: 20%;
+	 }
+	 
+	 
+    </style>
+	</head>
+	<body onload="loading()">
+	
+	<div class="decor">
+		<div class="form-left-decoration"></div>
+	  <div class="form-right-decoration"></div>
+	  <div class="circle"></div>
+		<div class="form-inner" >
+		<h1>Aasif Communication</h1>
+			Title:<br>
+			<input type="text" class="asd" id="title" placeholder="title"><br />
+			<div class="but"><button id=btn1 class="sel" onclick="toggle1()">SALE</button><button id=btn2 class="sel" onclick="toggle2()">DEPOSIT</button></div><br>
+			<div id="sle" class="sle" visibility="hidden">
+			Sale:<br>
+			<input type="tel" id="sale" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" placeholder="sale ammount"><br />
+			Cost:<br>
+			<input type="tel" id="cost" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" placeholder="cost ammount"><br />
+			</div>
+			<div id="dbt">
+			Debit:<br>
+			<input type="tel" id="debit" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" placeholder="debit ammount"><br />
+			</div>
+			<div id=btn style="display: none;">
+			Pin:<br>
+			<input type="tel" id="pass" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  placeholder="Enter PIN" style="-webkit-text-security: disc;"><br />
+			<button  type="submit" value="submit"  onclick="insert_value()">Submit</button>
+			</div>
+		</div>
+		</div>
+		<div class="modal" id="load" ><button  type="submit" value="submit"  onclick="hide()">Close</button></div>
+		<script>
+			function show(){
+				var load = document.getElementById("load");
+				load.style.display = "block";
+			}
+			function hide(){
+				var load = document.getElementById("load");
+				
+				load.style.display = "none";
+				load.style.display = "none";
+			}
+			function loading(){
+				var title = document.getElementById("title");
+				var sale = document.getElementById("sale");
+				var cost = document.getElementById("cost");
+				var debit = document.getElementById("debit");
+				var pass = document.getElementById("pass");
+				pass.value = "";
+				title.value = "";
+				sale.value = "";
+				cost.value = "";
+				debit.value = "";
+			}
+			function toggle1(){
+				var ttl = document.getElementById("title");
+				if(ttl.value){
+					var sale = document.getElementById("sle");
+					var dbt = document.getElementById("dbt");
+					var btn = document.getElementById("btn");
+					var btn1 = document.getElementById("btn1");
+					var btn2 = document.getElementById("btn2");
+					sale.style.display = "block";
+					dbt.style.display = "none";
+					btn.style.display = "block";
+					btn1.style.background = "#3a2727";
+					btn2.style.background = "#5a7233";
+					var t = ttl.value;
+					loading();
+					ttl.value = t;
+				}
+				else
+					alert("Enter Title First");
+					
+			}
+			
+			function toggle2(){
+				var ttl = document.getElementById("title");
+				if(ttl.value){
+					var sale = document.getElementById("sle");
+					var dbt = document.getElementById("dbt");
+					var btn = document.getElementById("btn");
+					var btn1 = document.getElementById("btn1");
+					var btn2 = document.getElementById("btn2");
+					sale.style.display = "none";
+					dbt.style.display = "block";
+					btn.style.display = "block";
+					btn1.style.background = "#5a7233";
+					btn2.style.background = "#3a2727";
+					var t = ttl.value;
+					loading();
+					ttl.value = t;
+				}
+				else
+					alert("Enter Title First");
+			}
+			function insert_value(){
+				var title = document.getElementById("title");
+				var btn = document.getElementById("btn");
+				var btn1 = document.getElementById("btn1");
+				var btn2 = document.getElementById("btn2");
+				var sale = document.getElementById("sale");
+				var cost = document.getElementById("cost");
+				var debit = document.getElementById("debit");
+				var pass = document.getElementById("pass");
+				var sle = document.getElementById("sle");
+				var dbt = document.getElementById("dbt");
+				var e = "1256";
+				if(title.value)
+					if(sle.style.display === "block")
+						if(sale.value % 1 === 0)
+							if(cost.value % 1 === 0)
+								if(pass.value === e){
+									pass.value = "";
+									if(upload(title.value,sale.value,cost.value,0)){
+										title.value = "";
+										sale.value = "";
+										cost.value = "";
+										btn1.style.background = "#5a7233";
+										sle.style.display = "none";
+										btn.style.display = "none";
+										alert("Sale Recorded ! ");
+									}
+									else
+										alert("Failed ! Please Try Again !");
+								}
+								else
+									alert("Enter Correct PIN !!!");
+							else
+								alert("Enter Cost Ammount !!");
+						else
+							alert("Enter Sale Ammount !!");
+					else
+						if(debit.value % 1 === 0)
+							if(pass.value === e)
+								if(upload(title.value,0,0,debit.value)){
+									title.value = "";
+									debit.value = "";
+									btn2.style.background = "#5a7233";
+									dbt.style.display = "none";
+									//btn.style.display = "none";
+									alert("Debit Recorded");
+								}
+								else
+									alert("Failed !! Please Try Again !");
+							else
+								alert("Enter Correct PIN !!!");
+						else
+							alert("Enter Debit Ammount !!");
+				else
+					alert("Enter Title !!");
+			}
+			function upload(t,s,c,d){
+				btn.style.display = "none";
+				var s_url = "https://script.google.com/macros/s/AKfycbwQmb9AsrHIzONiei5YhspoYc-9bDfIXixHlas0sa4sfNTUECw/exec?callback=ctrlq&";
+				var url = s_url + "&title=" + t + "&sale=" + s + "&cost=" + c + "&debit=" + d;
+				var rs = 0;
+				var xhttp = new XMLHttpRequest();
+				xhttp.open('GET', url, false);
+				xhttp.onreadystatechange = function() {
+					if(this.readyState === 4 && this.status === 200) {
+						if(this.responseText === "success")
+							rs = 1;
+					}
+				};
+				xhttp.send();
+				if(rs === 1){
+					loading();
+					return true;
+				}
+				else
+					return false;
+			}
+		</script>
+	</body>
+</html>

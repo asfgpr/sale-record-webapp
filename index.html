@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=.7">
+		<title>My Sale</title>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+		<style>
+      * {
+			box-sizing: border-box;
+      }
+      html, body {
+		min-height: 100vh;
+		padding: 0;
+		margin: 0;
+		font-family: Roboto, Arial, sans-serif;
+		font-size: 14px; 
+		color: #666;
+      }
+		  input, textarea { 
+		  outline: none;
+      }
+      body {
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  padding: 20px;
+		  background: #5a7233;
+      }
+      h1 {
+		  margin-top: 0;
+		  font-weight: 500;
+      }
+      .decor {
+		  position: relative;
+		  width: 80%;
+		  border-radius: 30px;
+		  background: #fff;
+      }
+      .form-left-decoration,
+      .form-right-decoration {
+		  content: "";
+		  position: absolute;
+		  width: 50px;
+		  height: 20px;
+		  border-radius: 20px;
+		  background: #5a7233;
+      }
+      .form-left-decoration {
+		  bottom: 60px;
+		  left: -30px;
+      }
+      .form-right-decoration {
+		  top: 60px;
+		  right: -30px;
+      }
+      .form-left-decoration:before,
+      .form-left-decoration:after,
+      .form-right-decoration:before,
+      .form-right-decoration:after {
+		  content: "";
+		  position: absolute;
+		  width: 50px;
+		  height: 20px;
+		  border-radius: 30px;
+		  background: #fff;
+      }
+      .form-left-decoration:before {
+		top: -20px;
+      }
+      .form-left-decoration:after {
+		  top: 20px;
+		  left: 10px;
+      }
+      .form-right-decoration:before {
+		  top: -20px;
+		  right: 0;
+      }
+      .form-right-decoration:after {
+		  top: 20px;
+		  right: 10px;
+      }
+      .circle {
+		  position: absolute;
+		  bottom: 80px;
+		  left: -55px;
+		  width: 20px;
+		  height: 20px;
+		  border-radius: 50%;
+		  background: #fff;
+      }
+      .form-inner {
+		padding: 40px;
+      }
+      .form-inner input,
+      .form-inner textarea {
+		  display: block;
+		  width: 100%;
+		  padding: 15px;
+		  margin-bottom: 10px;
+		  border: none;
+		  border-radius: 20px;
+		  background: #d0dfe8;
+      }
+      .form-inner textarea {
+		resize: none;
+      }
+      button {
+		  width: 100%;
+		  padding: 10px;
+		  margin-top: 20px;
+		  border-radius: 20px;
+		  border: none;
+		  border-bottom: 4px solid #3e4f24;
+		  background: #5a7233; 
+		  font-size: 16px;
+		  font-weight: 400;
+		  color: #fff;
+      }
+      button:hover {
+		background: #3e4f24;
+      } 
+      @media (min-width: 568px) {
+		.decor {
+			width: 500px;
+		}
+      }
+	  .sel{
+		width: 40%;
+		margin-top: 0;
+		margin-left: 5%;
+		margin-right: 5%;
+	  }
+	  .but{
+		width: 100%;
+		text-align: center;
+	  }
+	  #sle{
+		display: none;
+	  }
+	  #dbt{
+		display: none;
+	  }
+	  .modal {
+		display:    none;
+		position:   fixed;
+		z-index:    1000;
+		top:        0;
+		left:       0;
+		height:     100%;
+		width:      100%;
+		background: rgba( 255, 255, 255, .8 ) 
+					url('ajaa.gif') 
+					50% 50% 
+					no-repeat;
+		background-size: 30%;
+	 }
+	 .report{
+		width: 100%;
+		display: flex;
+	 }
+	 .report button{
+		width: 25%;
+		padding: 4px;
+		margin-top: 0;
+		margin-bottom: 20px;
+		background: #4b8e8b;
+		border-bottom: 4px solid #1c3c46;
+		display: table-cell;
+	 }
+	 .report button:hover{
+		background: #1c3c46;
+	 }
+	 #lnktxt{
+		width: 65%;
+		padding: 7px;
+		margin: 0px 10px 20px 10px;
+		display: table-cell;
+		-webkit-text-security: disc;
+	 }
+	 #lnkdiv{
+		display: none;
+		width: 75%
+	}
+	#lnksub {
+		width: 27%;
+	}
+	
+	 
+	 
+    </style>
+	</head>
+	<body>
+	
+	<div class="decor">
+		<div class="form-left-decoration"></div>
+	  <div class="form-right-decoration"></div>
+	  <div class="circle"></div>
+		<div class="form-inner" >
+		<div class="report">
+		<button id="lnk">Saved Data</button>
+		<div id="lnkdiv"><input type="tel" id="lnktxt" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" placeholder="ENTER PIN">
+		<button id="lnksub" >Open</button>
+		</div></div>
+		<div><h1>Aasif Communication</h1>
+			Title:<br>
+			<input type="text" class="asd" id="title" placeholder="Enter Title"><br />
+			<div class="but"><button id=btn1 class="sel" >SALE</button><button id=btn2 class="sel">DEPOSIT</button></div><br>
+			<div id="sle" class="sle" visibility="hidden">
+			Sale:<br>
+			<input type="tel" id="sale" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" placeholder="Enter Sale Ammount"><br />
+			Cost:<br>
+			<input type="tel" id="cost" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" placeholder="Enter Cost Ammount"><br />
+			</div>
+			<div id="dbt">
+			Debit:<br>
+			<input type="tel" id="debit" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" placeholder="Enter Debit Ammount"><br />
+			</div>
+			<div id=btn style="display: none;">
+			Pin:<br>
+			<input type="tel" id="pass" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  placeholder="Enter PIN" style="-webkit-text-security: disc;"><br />
+			<button  type="submit" id="submit" >Submit</button>
+			</div>
+		</div></div>
+		</div>
+		<div class="modal" id="load" ></div>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$('#lnk').click(function(){
+					if($("#lnkdiv").is(":visible"))
+						$("#lnkdiv").hide(500);
+					else
+						$("#lnkdiv").show(500);
+				});
+				
+				$('#lnksub').click(function(){
+					if($("#lnktxt").val() == "2743"){
+						$("#lnktxt").val("");
+						$("#lnkdiv").hide(500);
+						window.open('https://docs.google.com/spreadsheets/d/1rxq15mzocIZN1tizvNzLnvZs28n7UPbLnngRJA_tRm0/edit?usp=sharing','_blank');
+					}
+					else
+						alert("Please Enter Correct PIN");
+				});
+				
+				$('#btn1').click(function(){
+					if($("#title").val()){
+						$("#sle").show(500);
+						$("#dbt").hide(500);
+						$("#btn").show(500);
+						$("#btn1").css({background: "#3a2727"});
+						$("#btn2").css({background: "#5a7233"});
+						var a = $("#title").val();
+						$clear();
+						$("#title").val(a);
+					}
+					else
+						alert("Enter Title First");
+				});
+				
+				$('#btn2').click(function(){
+					if($("#title").val()){
+						$("#sle").hide(500);
+						$("#dbt").show(500);
+						$("#btn").show(500);
+						$("#btn1").css({background: "#5a7233"});
+						$("#btn2").css({background: "#3a2727"});
+						var a = $("#title").val();
+						$clear();
+						$("#title").val(a);
+					}
+					else
+						alert("Enter Title First");
+				});
+				
+				$clear = function(){
+					$("#title").val("");
+					$("#sale").val("");
+					$("#cost").val("");
+					$("#debit").val("");
+					$("#pass").val("");
+				}
+				
+				$upload = function(t,s,c,d){
+					var s_url = "https://script.google.com/macros/s/AKfycbwQmb9AsrHIzONiei5YhspoYc-9bDfIXixHlas0sa4sfNTUECw/exec?action=insert&";
+					var url = s_url + "title=" + t + "&sale=" + s + "&cost=" + c + "&debit=" + d;
+					var request = jQuery.ajax({
+						crossDomain: true,
+						url: url,
+						method: "GET",
+						dataType: "json",
+						error: function (xhr, status) {
+							alert("Server Not Responding ! Please Try Again !!");
+							$load(0);
+						},
+						success: function(response){
+							if(response.result === "success")
+								$done()
+							else
+								alert("Data Not Valid !! Server Responce Diffrent !!!");
+						}
+					});
+				}
+				
+				$done = function(){
+					$clear();
+					$("#btn2").css({background: "#5a7233"});
+					$("#btn1").css({background: "#5a7233"});
+					$("#sle").hide(500);
+					$("#dbt").hide();
+					$("#btn").hide(500);
+					alert("Data Saved Successfull.")
+					$load(0);
+				}
+				
+				$load = function(x){
+					if(x === 1)
+						$("#load").show();
+					else
+						$("#load").hide();
+				}
+				
+				$('#submit').click(function(){
+					var e = "1256";
+					if($("#title").val())
+						if($("#sle").is(":visible"))
+							if($.isNumeric($("#sale").val()))
+								if($.isNumeric($("#cost").val()))
+									if($("#pass").val() == e){
+										$("#pass").val("");
+										$load(1);
+										$upload($("#title").val(),$("#sale").val(),$("#cost").val(),0);
+									}
+									else
+										alert("Enter Correct PIN !!!");
+								else
+									alert("Enter Cost Ammount !!");
+							else
+								alert("Enter Sale Ammount !!");
+						else
+							if($.isNumeric($("#debit").val()))
+								if($("#pass").val() == e){
+									$("#pass").val("");
+									$load(1);
+									$upload($("#title").val(),0,0,$("#debit").val());
+								}
+								else
+									alert("Enter Correct PIN !!!");
+							else
+								alert("Enter Debit Ammount !!");
+					else
+						alert("Enter Title !!");
+				});
+			});
+		</script>
+	</body>
+</html>
